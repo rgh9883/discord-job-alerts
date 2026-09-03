@@ -20,11 +20,12 @@ jobs:
 
       - run: python check_internships.py
         env:
-          DISCORD_WEBHOOK_SOFTWARE: ${{ secrets.DISCORD_WEBHOOK_SOFTWARE }}
-          DISCORD_WEBHOOK_AIML: ${{ secrets.DISCORD_WEBHOOK_AIML }}
-          DISCORD_WEBHOOK_HARDWARE: ${{ secrets.DISCORD_WEBHOOK_HARDWARE }}
-          DISCORD_WEBHOOK_QUANT: ${{ secrets.DISCORD_WEBHOOK_QUANT }}
-          DISCORD_WEBHOOK_PRODUCT: ${{ secrets.DISCORD_WEBHOOK_PRODUCT }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_THREAD_SOFTWARE: ${{ secrets.DISCORD_THREAD_SOFTWARE }}
+          DISCORD_THREAD_AIML: ${{ secrets.DISCORD_THREAD_AIML }}
+          DISCORD_THREAD_HARDWARE: ${{ secrets.DISCORD_THREAD_HARDWARE }}
+          DISCORD_THREAD_QUANT: ${{ secrets.DISCORD_THREAD_QUANT }}
+          DISCORD_THREAD_PRODUCT: ${{ secrets.DISCORD_THREAD_PRODUCT }}
 
       - name: Commit updated seen_ids.json
         run: |
