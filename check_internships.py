@@ -32,8 +32,19 @@ for listing in new_listings:
         "footer": {"text": ", ".join(listing["terms"])},
     }
     body = json.dumps({"embeds": [embed]}).encode()
-    req = urllib.request.Request(WEBHOOK_URL, data=body, headers={"Content-Type": "application/json"})
-    urllib.request.urlopen(req)
+    req = urllib.request.Request(
+        WEBHOOK_URL,
+        data=body,
+        headers={"Content-Type": "application/json", "User-Agent": "discord-job-alerts (github actions)"},
+    )
+    try:
+        urllib.request.urlopen(req)
+    except urllib.error.HTTPError as e:
+        if e.code == 429:  # rate limited — back off and retry once
+            time.sleep(5)
+            urllib.request.urlopen(req)
+        else:
+            raise
     time.sleep(1)  # stay well under Discord's rate limit
 
 # Update seen state with every id currently in the feed (not just active ones,
